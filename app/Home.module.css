@@ -1,0 +1,11 @@
+.video_container{
+    width: 90%;
+    height : 100px;
+    display: flex;
+    justify-content: space-between;
+    /* position: fixed; */
+    top: 0;
+    left: 10%;
+    right: 10%;
+    
+}

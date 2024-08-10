@@ -1,0 +1,26 @@
+.header_container{
+    width: 80%;
+    height : 100px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    /* position: fixed; */
+    margin-left: 10%;
+}
+
+.title{
+    margin: 40px;
+    display: flex;
+    justify-content : center;
+    align-items: center;
+    font-size: 44px;   
+}
+.icon{
+    margin: 40px;
+    display: flex;
+    justify-content : center;
+    align-items: center;
+    font-size: 40px; 
+    font-weight: lighter;
+}
+
