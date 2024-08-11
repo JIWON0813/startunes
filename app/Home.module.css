@@ -1,11 +1,48 @@
-.video_container{
-    width: 90%;
-    height : 100px;
+.button_container{
     display: flex;
-    justify-content: space-between;
-    /* position: fixed; */
-    top: 0;
-    left: 10%;
-    right: 10%;
-    
+    align-items: center;
+    justify-content: center;
+    height: 30vh; /* 버튼 컨테이너가 전체 화면의 30%를 차지하도록 설정 */
+    margin-left: 10%;
+    width: 80%;
+    background-color: #f1f3f5;
+}
+
+.customButton {
+    background-color: black;
+    color: yellow;
+    border-radius: 8px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    height: auto; /* 글씨 크기에 맞춰 높이가 설정됨 */
+  }
+
+  .video_container iframe {
+    width: 100%; /* 부모 요소의 전체 너비를 차지 */
+    height: calc(25vw * 9 / 16); /* 16:9 비율로 높이를 설정 */
+    max-width: 100%; /* 최대 너비를 100%로 설정 */
+    border: none; /* Optional: Removes the border */
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+.video_container{
+    width: 80%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    background-color: #f1f3f5; 
+    margin-left: 10%;
+}
+
+.empty_container{
+    width: 80%;
+    height: 10vh;
+    display: flex;
+    background-color: #f1f3f5;
+    margin-left: 10%;
 }

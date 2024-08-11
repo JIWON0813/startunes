@@ -1,20 +1,19 @@
-import { FaSearch } from "react-icons/fa";
+import { FaPaperPlane, FaSearch } from "react-icons/fa";
 import classes from "./Header.module.css";
-import { IoPaperPlaneOutline } from "react-icons/io5";
-import { IoIosSearch } from "react-icons/io";
+import Link from "next/link";
 
-export default function Header({}){
+export default function Footer({}){
     return (
         <>
           <div className={classes.header_container}>
             <div className={classes.icon}>
-            <IoPaperPlaneOutline />
+            <FaPaperPlane  />
             </div>
             <div className={classes.title}>
             <span >StarTunes</span> 
             </div>
             <div className={classes.icon}>
-            <IoIosSearch  /> 
+            <FaSearch  /> 
             </div>  
           </div>     
       </>

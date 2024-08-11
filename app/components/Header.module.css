@@ -3,9 +3,9 @@
     height : 100px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid black;
     /* position: fixed; */
     margin-left: 10%;
+    background-color: #f1f3f5;
 }
 
 .title{
