@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import classes from "./Home.module.css";
 
-export default function Home() {
+export default function MainList() {
   const videoUrlLists = [
     ['UKQ1OL6LWPM', 'QlAvoQPEh80', 'Hjk1lHU_FSM'],
     ['5mAgMFNhTBY', 'IDjUH31pnvA', '7lVE9BQENGg'],
