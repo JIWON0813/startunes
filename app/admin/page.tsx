@@ -1,73 +1,25 @@
 "use client"; // this is a client component 👈🏽
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from 'material-react-table';
+import { Person, getSongs } from './api/song';
 
-//example data type
-type Person = {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
-  address: string;
-  city: string;
-  state: string;
-};
+export default function Admin() {
 
-//nested data is ok, see accessorKeys in ColumnDef below
-const data: Person[] = [
-  {
-    name: {
-      firstName: 'John',
-      lastName: 'Doe',
-    },
-    address: '261 Erdman Ford',
-    city: 'East Daphne',
-    state: 'Kentucky',
-  },
-  {
-    name: {
-      firstName: 'Jane',
-      lastName: 'Doe',
-    },
-    address: '769 Dominic Grove',
-    city: 'Columbus',
-    state: 'Ohio',
-  },
-  {
-    name: {
-      firstName: 'Joe',
-      lastName: 'Doe',
-    },
-    address: '566 Brakus Inlet',
-    city: 'South Linda',
-    state: 'West Virginia',
-  },
-  {
-    name: {
-      firstName: 'Kevin',
-      lastName: 'Vandy',
-    },
-    address: '722 Emie Stream',
-    city: 'Lincoln',
-    state: 'Nebraska',
-  },
-  {
-    name: {
-      firstName: 'Joshua',
-      lastName: 'Rolluffs',
-    },
-    address: '32188 Larkin Turnpike',
-    city: 'Omaha',
-    state: 'Nebraska',
-  },
-];
+  const [data, setData] = useState<Person[]>([]); // 데이터를 상태로 관리
 
-export default function Example() {
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 데이터를 가져옵니다.
+    const fetchData = async () => {
+      const songsData = await getSongs(); // 비동기 함수 호출
+      setData(songsData); // 가져온 데이터를 상태에 설정
+    };
+    fetchData();
+  }, []);
   //should be memoized or stable
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
@@ -102,12 +54,24 @@ export default function Example() {
 
   const table = useMaterialReactTable({
     columns,
-    data, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
+    data,
+    enableColumnActions: false,
+    enableColumnFilters: false,
+    enablePagination: false,
+    enableSorting: false,
   });
 
+  if(!data){
+    return null;
+  }
+
   return(
-    <div>
-      <MaterialReactTable table={table} />
-    </div>
+    <>
+     {data.length > 0 ? (
+      <MaterialReactTable columns={columns} data={data} />
+    ) : (
+      <div>Loading...</div>
+    )}
+    </>
   ) ;
 };

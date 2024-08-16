@@ -1,16 +1,18 @@
 'use server'
 
+export type Person = {
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  address: string;
+  city: string;
+  state: string;
+};
+
 export async function getSongs(){
     //example data type
-type Person = {
-    name: {
-      firstName: string;
-      lastName: string;
-    };
-    address: string;
-    city: string;
-    state: string;
-  };
+
   
   //nested data is ok, see accessorKeys in ColumnDef below
   const data: Person[] = [

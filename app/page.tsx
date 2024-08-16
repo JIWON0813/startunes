@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import classes from "./Home.module.css";
+import Header from './components/Header';
 
 export default function MainList() {
   const videoUrlLists = [
@@ -22,6 +23,7 @@ export default function MainList() {
 
   return (
     <div>
+       <Header />
       <div className={classes.button_container}>
         <button className={classes.customButton} onClick={changeVideos}>
           click button🎰 
