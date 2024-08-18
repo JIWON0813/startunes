@@ -2,8 +2,8 @@
 
 import { JSDOM } from 'jsdom';
 
-export default async function handler(req : any, res : any) {
-  const { url } = req.query;
+export async function Info() {
+  const url = 'asd';
 
   try {
     // HTML 가져오기
@@ -30,11 +30,11 @@ export default async function handler(req : any, res : any) {
     const src = imgElement?.getAttribute('src');
 
     if (src) {
-      res.status(200).json({ src });
+      // res.status(200).json({ src });
     } else {
-      res.status(404).json({ message: 'Image not found' });
+      // res.status(404).json({ message: 'Image not found' });
     }
   } catch (error : any) {
-    res.status(500).json({ message: 'Error fetching image', error: error.message });
+    // res.status(500).json({ message: 'Error fetching image', error: error.message });
   }
 }
