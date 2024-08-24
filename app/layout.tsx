@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { FaPaperPlane, FaSearch } from "react-icons/fa";
 import Header from "./components/Header";
+import './globals.css';
 
 export default function RootLayout({
   children,

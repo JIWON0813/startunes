@@ -17,9 +17,3 @@ body {
 .main {
   padding: 200px;
 }
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
