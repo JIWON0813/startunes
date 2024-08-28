@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ReactQueryClientProviders from '../config/ReactQueryClientProvider';
 import SignInPage from './components/signIn';
 import AdminHomePage from './home/page';
+import AdminHomeLayout from './home/layout';
 
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
@@ -11,7 +12,9 @@ export default function Admin() {
   return(
     <ReactQueryClientProviders>
      {isLoggedIn ? (
-      <AdminHomePage  />
+      <AdminHomeLayout>
+        <AdminHomePage />
+      </AdminHomeLayout>
     ) : (
       <SignInPage setLogin={setIsLoggedIn}/>
     )}

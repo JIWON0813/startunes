@@ -14,11 +14,20 @@ export default function VideosPage() {
 
   useEffect(() => {
     const supabase = createBrowserSupabaseClient();
-    const session = supabase.auth.getSession();
-
-    if(!session){
-        alert('TLqkf')
+    
+    async function checkSession() {
+      await supabase.auth.getSession().then(session => {
+        if (session.data.session) {
+          console.log('User is logged in:', session.data.session);
+          // 세션이 있으면 인증된 상태로 처리
+        } else {
+          console.log('User is not logged in');
+          // 세션이 없으면 로그인 페이지로 리다이렉트
+          window.location.href = '/admin';
+        }
+      });
     }
+    checkSession();
 
     const fetchData = async () => {
       const videosData = await getVideos({}); 
@@ -79,9 +88,7 @@ export default function VideosPage() {
 
   return(
     <>
-    
       <MaterialReactTable columns={columns} data={data} />
-
     </>
   ) ;
 };

@@ -8,6 +8,7 @@ import {
 } from 'material-react-table';
 import { SongRow, getSongs } from './api/song';
 import { createBrowserSupabaseClient } from '@/app/utils/supabase/client';
+import SongInput2 from './songtest';
 
 export default function SongsPage() {    
   const [data, setData] = useState<SongRow[]>([]); 
@@ -16,9 +17,6 @@ export default function SongsPage() {
     const supabase = createBrowserSupabaseClient();
     const session = supabase.auth.getSession();
 
-    if(!session){
-        alert('TLqkf')
-    }
 
     const fetchData = async () => {
       const songsData = await getSongs({}); 
@@ -80,7 +78,10 @@ export default function SongsPage() {
   return(
     <>
      {data.length > 0 ? (
+      <>
       <MaterialReactTable columns={columns} data={data} />
+      <SongInput2 />
+      </>
     ) : (
       <div>Loading...</div>
     )}
