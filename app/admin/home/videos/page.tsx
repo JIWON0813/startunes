@@ -70,9 +70,29 @@ export default function VideosPage() {
           },
         {
             accessorKey: 'song_id',
-            header: 'Video ID',
+            header: 'song_id',
             size: 150,
         },
+        {
+          accessorKey: 'song_title', 
+          header: 'song_title',
+          size: 150,
+      },
+      {
+        accessorKey: 'channel', 
+        header: 'channel',
+        size: 150,
+    },
+    {
+      accessorKey: 'description', 
+      header: 'description',
+      size: 150,
+  },
+  {
+    accessorKey: 'flag', 
+    header: 'flag',
+    size: 150,
+},
         {
             accessorKey: 'create_dt',
             header: 'Creation Date',

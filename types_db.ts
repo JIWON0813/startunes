@@ -92,28 +92,40 @@ export type Database = {
       }
       video: {
         Row: {
+          channel: string | null
           cover_artist: string | null
           create_dt: string
+          description: string | null
           edit_dt: string | null
+          flag: string | null
           id: string
           original_artist_id: string | null
           song_id: string | null
+          song_title: string | null
         }
         Insert: {
+          channel?: string | null
           cover_artist?: string | null
           create_dt?: string
+          description?: string | null
           edit_dt?: string | null
+          flag?: string | null
           id: string
           original_artist_id?: string | null
           song_id?: string | null
+          song_title?: string | null
         }
         Update: {
+          channel?: string | null
           cover_artist?: string | null
           create_dt?: string
+          description?: string | null
           edit_dt?: string | null
+          flag?: string | null
           id: string
           original_artist_id?: string | null
           song_id?: string | null
+          song_title?: string | null
         }
         Relationships: []
       }

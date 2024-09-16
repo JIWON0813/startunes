@@ -11,9 +11,13 @@ export default function VideoInput({videoId} : any) {
 
   const fieldsConfig = {
     id: { type: 'text', label: 'Video ID' },
-    song_id: { type: 'text', label: 'Song_id' },
     cover_artist: { type: 'text', label: 'cover_artist' },
     original_artist_id: { type: 'text', label: 'original_artist_id' },
+    song_id: { type: 'text', label: 'Song_id' },
+    song_title: { type: 'text', label: 'song_title' },
+    channel: { type: 'text', label: 'channel' },
+    description: { type: 'text', label: 'description' },
+    flag: { type: 'text', label: 'flag' },
     create_dt: { type: 'text', label: 'Created Time' },
     edit_dt: { type: 'text', label: 'Edit Time' },
   } as any;
@@ -23,12 +27,16 @@ export default function VideoInput({videoId} : any) {
       acc[field] = ''; // Initialize all fields with empty strings
       return acc;
     }, {} as VideoRow),
-    onSubmit: async (values) => {
+    onSubmit: async (values : VideoRowInsert) => {
       const video: VideoRowInsert = {
         id: values.id,
         song_id: values.song_id,
         cover_artist: values.cover_artist,
         original_artist_id: values.original_artist_id,
+        song_title:values.song_title,
+        channel:values.channel,
+        description:values.description,
+        flag:values.flag,
         edit_dt: new Date().toISOString(),
       };
 
@@ -60,6 +68,10 @@ export default function VideoInput({videoId} : any) {
         setValues({
           id: '',
           song_id: '',
+          song_title:'',
+          channel:'',
+          description:'',
+          flag:'',
           cover_artist: '',
           original_artist_id: '',
           create_dt: '',
