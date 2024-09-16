@@ -20,7 +20,7 @@ export default function SignInPage({setLogin} : any) {
       })
       
       if(data.user != null){
-        localStorage.setItem('supabase.auth.token', JSON.stringify(data.session));
+        // localStorage.setItem('supabase.auth.token', JSON.stringify(data.session));
         setLogin(true)
       }
 

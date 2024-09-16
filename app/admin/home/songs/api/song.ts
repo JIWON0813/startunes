@@ -16,7 +16,7 @@ export async function getSongs({
 }){
    const supabase = await createServerSupabaseClient()
 
-   const {data , error} = await supabase.from('song').select('*').like('artist', `%${searchInput}%`).order('created_time', {ascending : false})
+   const {data , error} = await supabase.from('song').select('*').like('title', `%${searchInput}%`).order('created_time', {ascending : false})
 
   if(error){
     handleError(error)
@@ -25,13 +25,29 @@ export async function getSongs({
   return data;
 }
 
+export async function getSong(song_id : string){
+   const supabase = await createServerSupabaseClient()
+
+   const {data , error} = await supabase.from('song').select('*').eq('song_id', song_id)
+
+  if(error){
+    handleError(error)
+  }
+
+  if(data == null){
+    handleError({
+      message : '데이터가 존재하지 않습니다.'
+    })
+  }
+
+  return data![0];
+}
+
 export async function createSong(song:SongRowInsert) {
   const supabase = await createServerSupabaseClient()
 
   const {data, error} = await supabase.from('song').insert({
-    ...song,
-    created_time : new Date().toISOString(),
-    edit_time : new Date().toISOString()
+    ...song
   })
 
   if(error){

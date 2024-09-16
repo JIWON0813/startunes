@@ -37,5 +37,5 @@ export default function useForm<T>({
     setSubmitting(false);
   };
 
-  return { values, errors, submitting, handleChange, handleSubmit };
+  return { values, errors, submitting, setValues, handleChange, handleSubmit };
 }

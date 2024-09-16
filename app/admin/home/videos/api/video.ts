@@ -25,13 +25,29 @@ export async function getVideos({
   return data;
 }
 
+export async function getVideo(id : string){
+  const supabase = await createServerSupabaseClient()
+
+  const {data , error} = await supabase.from('video').select('*').eq('id', id)
+
+ if(error){
+   handleError(error)
+ }
+
+ if(data == null){
+   handleError({
+     message : '데이터가 존재하지 않습니다.'
+   })
+ }
+
+ return data![0];
+}
+
 export async function createVideo(video:VideoRowInsert) {
   const supabase = await createServerSupabaseClient()
 
   const {data, error} = await supabase.from('video').insert({
-    ...video,
-    created_time : new Date().toISOString(),
-    edit_time : new Date().toISOString()
+    ...video
   })
 
   if(error){
@@ -59,7 +75,7 @@ export async function updateVideo(video:VideoRowUpdate) {
 export async function deleteVideo(id : string) {
   const supabase = await createServerSupabaseClient()
 
-  const {data, error} = await supabase.from('video').delete().match({ video_id : id})
+  const {data, error} = await supabase.from('video').delete().match({ id : id})
 
   if(error){
     handleError(error)

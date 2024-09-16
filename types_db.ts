@@ -25,7 +25,7 @@ export type Database = {
         Update: {
           create_dt?: string | null
           edit_dt?: string | null
-          id?: string
+          id: string
           name?: string
         }
         Relationships: []

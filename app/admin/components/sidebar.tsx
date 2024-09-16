@@ -13,7 +13,7 @@ export default function Sidebar() {
         <Link href="/admin/home/videos" className="hover:bg-gray-700 p-2 rounded">
           Videos
         </Link>
-        <Link href="/admin/home/videos" className="hover:bg-gray-700 p-2 rounded">
+        <Link href="/admin/home/artists" className="hover:bg-gray-700 p-2 rounded">
           Artist
         </Link>
         </nav>

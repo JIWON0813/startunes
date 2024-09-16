@@ -1,25 +1,31 @@
 "use client"; // this is a client component 👈🏽
 
-import { useEffect, useMemo, useState } from 'react';
+import { createBrowserSupabaseClient } from '@/app/utils/supabase/client';
+import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from '@material-tailwind/react';
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from 'material-react-table';
-import { SongRow, getSongs } from './api/song';
-import { createBrowserSupabaseClient } from '@/app/utils/supabase/client';
-import { IoIosMore } from 'react-icons/io';
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, IconButton } from '@material-tailwind/react';
-import ReactQueryClientProviders from '@/app/config/ReactQueryClientProvider';
+import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
+import { SongRow, deleteSong, getSongs } from './api/song';
 import SongInput from './songInput';
 
 export default function SongsPage() {    
   const [data, setData] = useState<SongRow[]>([]); 
+  const router = useRouter();
 
   useEffect(() => {
     const supabase = createBrowserSupabaseClient();
-    const session = supabase.auth.getSession();
+    const checkSession = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
 
+      if(session == null){
+        router.push('/admin');
+      }
+    };
+    checkSession();
 
     const fetchData = async () => {
       const songsData = await getSongs({}); 
@@ -28,12 +34,21 @@ export default function SongsPage() {
     fetchData();
   }, []);
 
-  const [dropdownVisible, setDropdownVisible] = useState<string | null>(null);
+  const [selectedSongId, setSelectedSongId] = useState<string | null>(null); // 선택된 곡 ID
 
-  const toggleDropdown = (rowId: string) => {
-    setDropdownVisible(dropdownVisible === rowId ? null : rowId);
-    console.log('oo')
+  // 삭제 버튼 클릭 시 confirm을 사용해 삭제 여부 확인
+  const handleDelete = async (songId: string) => {
+    const isConfirmed = confirm('삭제하시겠습니까?'); // 확인/취소 팝업
+    if (isConfirmed) {
+      try {
+        await deleteSong(songId); // deleteSong 호출
+        setData((prevData) => prevData.filter((song) => song.song_id !== songId)); // 삭제된 곡 제거
+      } catch (error) {
+        console.error('Error deleting song:', error);
+      }
+    }
   };
+
 
   //should be memoized or stable
   const columns = useMemo<MRT_ColumnDef<SongRow>[]>(
@@ -74,7 +89,7 @@ export default function SongsPage() {
         size: 100,
         Cell: ({ row }) => (
           <div>
-          <Button className='h-10 w-20 bg-gray-800 text-white rounded-3xl'>
+          <Button className='h-10 w-20 bg-gray-800 text-white rounded-3xl' onClick={() => handleEdit(row.original.song_id)} >
             수정
           </Button>
           </div>
@@ -87,7 +102,7 @@ export default function SongsPage() {
         size: 100,
         Cell: ({ row }) => (
           <div>
-          <Button className='h-10 w-20 bg-red-600 text-white rounded-3xl'>
+          <Button className='h-10 w-20 bg-red-600 text-white rounded-3xl' onClick={() => handleDelete(row.original.song_id)}>
             삭제
           </Button>
           </div>
@@ -108,11 +123,18 @@ export default function SongsPage() {
 
   const [open, setOpen] = useState(false); // 팝업 열림 상태
   const handleOpen = () => setOpen(!open); // 팝업 열기/닫기 토글
+  const handleAddNew = () => {
+    setSelectedSongId(null); // Reset songId to trigger form reset
+    setOpen(true);
+  };
+  const handleEdit = (songId: string) => {
+    setSelectedSongId(songId); // 선택된 곡 ID 설정
+    setOpen(true); // 모달 열기
+  };
   return(
     <>
-     {data.length > 0 ? (
       <>
-       <Button onClick={handleOpen} className="h-[50px] w-[120px] bg-gray-800 text-white rounded-3xl text-white">
+       <Button onClick={handleAddNew} className="h-[50px] w-[120px] bg-gray-800 text-white rounded-3xl text-white">
           Add New +
         </Button>
       <MaterialReactTable columns={columns} data={data} />
@@ -120,10 +142,10 @@ export default function SongsPage() {
 
         {/* Dialog 컴포넌트로 팝업 구현 */}
         <Dialog open={open} handler={handleOpen}>
-          <DialogHeader>새로운 곡 추가</DialogHeader>
+          <DialogHeader>곡</DialogHeader>
           <DialogBody divider>
-            <SongInput />
-          </DialogBody>
+          <SongInput songId={selectedSongId} /> 
+        </DialogBody>
           <DialogFooter>
             <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
               닫기
@@ -131,9 +153,6 @@ export default function SongsPage() {
           </DialogFooter>
         </Dialog>
       </>
-    ) : (
-      <div>Loading...</div>
-    )}
     </>
   ) ;
 };
