@@ -81,8 +81,7 @@ export default function ArtistInput({ArtistId} : any) {
                 name={fieldName}
                 value={values[fieldName as keyof ArtistRow]}
                 onChange={handleChange}
-                className={`w-full ${errors[fieldName as keyof ArtistRow] && 'errorInput'}`}
-              />
+                className={`w-full ${errors[fieldName as keyof ArtistRow] && 'errorInput'}`} />
             </label>
             {errors[fieldName as keyof ArtistRow] && (
               <span className="text-red-500 text-sm">
@@ -94,8 +93,7 @@ export default function ArtistInput({ArtistId} : any) {
         <Button
           className="h-[50px] w-[120px] bg-gray-800 text-white rounded-3xl"
           type="submit"
-          disabled={submitting}
-        >
+          disabled={submitting} >
           {ArtistId ? '수정' : '추가'}
         </Button>
       </form>

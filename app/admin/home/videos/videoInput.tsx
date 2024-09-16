@@ -1,17 +1,10 @@
 'use client';
 
-import { createBrowserSupabaseClient } from '@/app/utils/supabase/client';
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from '@material-tailwind/react';
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-  type MRT_ColumnDef,
-} from 'material-react-table';
-import { useRouter } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { Button, Input } from '@material-tailwind/react';
+import { useEffect, useState } from 'react';
 
-import { createVideo, updateVideo, getVideo, VideoRow, VideoRowInsert } from './api/video';
 import useForm from '../../components/useForm';
+import { createVideo, getVideo, updateVideo, VideoRow, VideoRowInsert } from './api/video';
 
 export default function VideoInput({videoId} : any) {
   const [loading, setLoading] = useState(true); // 곡 정보 로딩 상태

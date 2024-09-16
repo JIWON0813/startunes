@@ -1,11 +1,9 @@
 'use client'
 
-import { Button, Input } from "@material-tailwind/react";
-import { QueryClient, QueryClientProvider, useMutation } from "@tanstack/react-query";
-import { useState } from "react";
 import { createBrowserSupabaseClient } from "@/app/utils/supabase/client";
-import { error } from "console";
-import ReactQueryClientProviders from "@/app/config/ReactQueryClientProvider";
+import { Button, Input } from "@material-tailwind/react";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function SignInPage({setLogin} : any) {
   const [email, setEmail] = useState('')
@@ -36,15 +34,15 @@ export default function SignInPage({setLogin} : any) {
         <span className="mr-2">email</span>
           <Input
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e : any) => setEmail(e.target.value)}
           type="email"
-          className="w-full rounded-sm" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} crossOrigin={undefined}       />
+          className="w-full rounded-sm" />
           <span className="mr-2">password</span>
           <Input
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e : any) => setPassword(e.target.value)}
           type="password"
-          className="w-full rounded-sm" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} crossOrigin={undefined}    />
+          className="w-full rounded-sm" />
           <Button
           onClick={() => {
             signInMutation.mutate();
@@ -52,7 +50,7 @@ export default function SignInPage({setLogin} : any) {
           loading={signInMutation.isPending}
           disabled={signInMutation.isPending}
           color="light-blue"
-          className="w-full text-md py-1 bg-black" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} >
+          className="w-full text-md py-1 bg-black" >
             로그인
           </Button>
         </div>

@@ -10,7 +10,7 @@ import {
 import { createBrowserSupabaseClient } from '@/app/utils/supabase/client';
 import { deleteVideo, getVideos, VideoRow } from './api/video';
 import { useRouter } from 'next/navigation';
-import VideoInput from './vedioInput';
+import VideoInput from './videoInput';
 
 export default function VideosPage() {    
   const [data, setData] = useState<VideoRow[]>([]); 

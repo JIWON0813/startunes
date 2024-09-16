@@ -92,7 +92,7 @@ export default function ArtistsPage() {
         size: 100,
         Cell: ({ row }) => (
           <div>
-          <Button className='h-10 w-20 bg-red-600 text-white rounded-3xl' onClick={() => handleDelete(row.original.id)}>
+          <Button className='h-10 w-20 bg-red-600 text-white rounded-3xl' onClick={() => handleDelete(row.original.id)} >
             삭제
           </Button>
           </div>
@@ -125,20 +125,19 @@ export default function ArtistsPage() {
     <>
      
       <>
-       <Button onClick={handleAddNew} className="h-[50px] w-[120px] bg-gray-800 text-white rounded-3xl text-white">
+       <Button onClick={handleAddNew} className="h-[50px] w-[120px] bg-gray-800 text-white rounded-3xl text-white" >
           Add New +
         </Button>
       <MaterialReactTable columns={columns} data={data} />
      
-
         {/* Dialog 컴포넌트로 팝업 구현 */}
         <Dialog open={open} handler={handleOpen}>
-          <DialogHeader>곡</DialogHeader>
-          <DialogBody divider>
+          <DialogHeader >곡</DialogHeader>
+          <DialogBody>
           <ArtistInput ArtistId={selectedArtistId} /> 
         </DialogBody>
-          <DialogFooter>
-            <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
+          <DialogFooter >
+            <Button variant="text" color="red" onClick={handleOpen} className="mr-1" >
               닫기
             </Button>
           </DialogFooter>
