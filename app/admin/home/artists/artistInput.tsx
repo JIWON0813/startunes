@@ -11,6 +11,9 @@ export default function ArtistInput({ArtistId} : any) {
   const fieldsConfig = {
     id: { type: 'text', label: 'Artist ID' },
     name: {type : 'text', label: 'Name'},
+    eng_name: {type : 'text', label: 'eng_name'},
+    description: {type : 'text', label: 'description'},
+    flag: {type : 'text', label: 'flag'},
     create_dt: { type: 'text', label: 'Created Time' },
     edit_dt: { type: 'text', label: 'Edit Time' },
   } as any;
@@ -24,6 +27,9 @@ export default function ArtistInput({ArtistId} : any) {
       const artist: ArtistRowInsert = {
         id: values.id,
         name:values.name,
+        eng_name : values.eng_name,
+        description : values.description,
+        flag : values.flag,
         edit_dt: new Date().toISOString(),
       };
 
@@ -31,7 +37,7 @@ export default function ArtistInput({ArtistId} : any) {
         await updateArtist(artist); // 수정 시 updateArtist 호출
         alert('수정되었습니다.');
       } else {
-        artist.create_dt = new Date().toISOString()
+        artist.created_dt = new Date().toISOString()
         await createArtist(artist); // 새 곡 추가
         alert('입력되었습니다.');
       }
@@ -55,7 +61,10 @@ export default function ArtistInput({ArtistId} : any) {
         setValues({
           id: '',
           name: '',
-          create_dt: '',
+          eng_name : '',
+          description : '',
+          flag : '',
+          created_dt: '',
           edit_dt: '',
         });
         setLoading(false);

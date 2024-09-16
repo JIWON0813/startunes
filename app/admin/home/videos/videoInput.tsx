@@ -44,7 +44,7 @@ export default function VideoInput({videoId} : any) {
         await updateVideo(video); // 수정 시 updateVideo 호출
         alert('수정되었습니다.');
       } else {
-        video.create_dt = new Date().toISOString();
+        video.created_dt = new Date().toISOString();
         await createVideo(video); // 새 곡 추가
         alert('입력되었습니다.');
       }
@@ -74,7 +74,7 @@ export default function VideoInput({videoId} : any) {
           flag:'',
           cover_artist: '',
           original_artist_id: '',
-          create_dt: '',
+          created_dt: '',
           edit_dt: '',
         });
         setLoading(false);

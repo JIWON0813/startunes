@@ -11,20 +11,29 @@ export type Database = {
     Tables: {
       artist: {
         Row: {
-          create_dt: string | null
+          created_dt: string | null
+          description: string | null
           edit_dt: string | null
+          eng_name: string | null
+          flag: string | null
           id: string
           name: string
         }
         Insert: {
-          create_dt?: string | null
+          created_dt?: string | null
+          description?: string | null
           edit_dt?: string | null
+          eng_name?: string | null
+          flag?: string | null
           id: string
           name: string
         }
         Update: {
-          create_dt?: string | null
+          created_dt?: string | null
+          description?: string | null
           edit_dt?: string | null
+          eng_name?: string | null
+          flag?: string | null
           id: string
           name?: string
         }
@@ -33,6 +42,7 @@ export type Database = {
       channel: {
         Row: {
           created_dt: string
+          description: string | null
           edit_dt: string | null
           email: string | null
           flag: string | null
@@ -43,6 +53,7 @@ export type Database = {
         }
         Insert: {
           created_dt?: string
+          description?: string | null
           edit_dt?: string | null
           email?: string | null
           flag?: string | null
@@ -53,6 +64,7 @@ export type Database = {
         }
         Update: {
           created_dt?: string
+          description?: string | null
           edit_dt?: string | null
           email?: string | null
           flag?: string | null
@@ -67,24 +79,33 @@ export type Database = {
         Row: {
           artist: string | null
           created_time: string
+          description: string | null
           edit_time: string | null
           language: string | null
+          lyrics_all: string | null
+          lyrics_part: string | null
           song_id: string
           title: string | null
         }
         Insert: {
           artist?: string | null
           created_time?: string
+          description?: string | null
           edit_time?: string | null
           language?: string | null
+          lyrics_all?: string | null
+          lyrics_part?: string | null
           song_id: string
           title?: string | null
         }
         Update: {
           artist?: string | null
           created_time?: string
+          description?: string | null
           edit_time?: string | null
           language?: string | null
+          lyrics_all?: string | null
+          lyrics_part?: string | null
           song_id: string
           title?: string | null
         }
@@ -94,7 +115,7 @@ export type Database = {
         Row: {
           channel: string | null
           cover_artist: string | null
-          create_dt: string
+          created_dt: string
           description: string | null
           edit_dt: string | null
           flag: string | null
@@ -106,7 +127,7 @@ export type Database = {
         Insert: {
           channel?: string | null
           cover_artist?: string | null
-          create_dt?: string
+          created_dt?: string
           description?: string | null
           edit_dt?: string | null
           flag?: string | null
@@ -118,7 +139,7 @@ export type Database = {
         Update: {
           channel?: string | null
           cover_artist?: string | null
-          create_dt?: string
+          created_dt?: string
           description?: string | null
           edit_dt?: string | null
           flag?: string | null

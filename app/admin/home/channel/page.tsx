@@ -79,6 +79,11 @@ export default function ChannelsPage() {
         size: 150,
       },
       {
+        accessorKey: 'description', // title에 접근
+        header: 'description',
+        size: 150,
+      },
+      {
         accessorKey: 'flag', // title에 접근
         header: 'flag',
         size: 150,

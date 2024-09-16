@@ -14,6 +14,7 @@ export default function ChannelInput({ChannelId} : any) {
     join_date: {type : 'text', label: 'join_date'},
     email: {type : 'text', label: 'email'},
     profile_link: {type : 'text', label: 'profile_link'},
+    description: {type : 'text', label: 'description'},
     flag: {type : 'text', label: 'flag'},
     create_dt: { type: 'text', label: 'Created Time' },
     edit_dt: { type: 'text', label: 'Edit Time' },
@@ -31,6 +32,7 @@ export default function ChannelInput({ChannelId} : any) {
         join_date: values.join_date,
         email : values.email,
         profile_link: values.profile_link,
+        description : values.description,
         flag :values.flag,
         edit_dt: new Date().toISOString(),
       };
@@ -66,6 +68,7 @@ export default function ChannelInput({ChannelId} : any) {
           join_date: '',
           email: '',
           profile_link: '',
+          description : '',
           flag :'',
           created_dt: '',
           edit_dt: '',

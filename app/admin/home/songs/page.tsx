@@ -74,6 +74,21 @@ export default function SongsPage() {
         size: 150,
       },
       {
+        accessorKey: 'lyrics_part', // language에 접근
+        header: 'lyrics_part',
+        size: 150,
+      },
+      {
+        accessorKey: 'lyrics_all', // language에 접근
+        header: 'lyrics_all',
+        size: 150,
+      },
+      {
+        accessorKey: 'description', // language에 접근
+        header: 'description',
+        size: 150,
+      },
+      {
         accessorKey: 'created_time', // created_time에 접근
         header: 'Created Time',
         size: 150,

@@ -64,7 +64,22 @@ export default function ArtistsPage() {
         size: 150,
       },
       {
-        accessorKey: 'create_dt', // created_time에 접근
+        accessorKey: 'eng_name', // title에 접근
+        header: 'eng_name',
+        size: 150,
+      },
+      {
+        accessorKey: 'description', // title에 접근
+        header: 'description',
+        size: 150,
+      },
+      {
+        accessorKey: 'flag', // title에 접근
+        header: 'flag',
+        size: 150,
+      },
+      {
+        accessorKey: 'created_dt', // created_time에 접근
         header: 'created_dt',
         size: 150,
       },

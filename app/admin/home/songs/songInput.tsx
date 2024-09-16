@@ -13,6 +13,9 @@ export default function SongInput({songId} : any) {
     title: { type: 'text', label: 'Title' },
     artist: { type: 'text', label: 'Artist' },
     language: { type: 'text', label: 'Language' },
+    lyrics_part: { type: 'text', label: 'lyrics_part' },
+    lyrics_all: { type: 'text', label: 'lyrics_all' },
+    description: { type: 'text', label: 'description' },
     created_time: { type: 'text', label: 'Created Time' },
     edit_time: { type: 'text', label: 'Edit Time' },
   } as any;
@@ -28,6 +31,9 @@ export default function SongInput({songId} : any) {
         title: values.title,
         artist: values.artist,
         language: values.language,
+        lyrics_part : values.lyrics_part,
+        lyrics_all : values.lyrics_all,
+        description : values.description,
         edit_time: new Date().toISOString(),
       };
 
@@ -61,6 +67,9 @@ export default function SongInput({songId} : any) {
           title: '',
           artist: '',
           language: '',
+          lyrics_part : '',
+          lyrics_all : '',
+          description : '',
           created_time: '',
           edit_time: '',
         });
