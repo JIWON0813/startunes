@@ -16,6 +16,9 @@ export default function Sidebar() {
         <Link href="/admin/home/artists" className="hover:bg-gray-700 p-2 rounded">
           Artist
         </Link>
+        <Link href="/admin/home/channel" className="hover:bg-gray-700 p-2 rounded">
+          Channel
+        </Link>
         </nav>
       </div>
     );

@@ -2,15 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import { Button, Input } from '@material-tailwind/react';
-import { createArtist, updateArtist, getArtist, ArtistRow, ArtistRowInsert } from './api/artist';
+import { createChannel, updateChannel, getChannel, ChannelRow, ChannelRowInsert } from './api/channel';
 import useForm from '../../components/useForm';
 
-export default function ArtistInput({ArtistId} : any) {
+export default function ChannelInput({ChannelId} : any) {
   const [loading, setLoading] = useState(true); // 곡 정보 로딩 상태
 
-  const fieldsConfig = {
-    id: { type: 'text', label: 'Artist ID' },
+  const fieldsConfig = { 
+    id: { type: 'text', label: 'ID' },
     name: {type : 'text', label: 'Name'},
+    join_date: {type : 'text', label: 'join_date'},
+    email: {type : 'text', label: 'email'},
+    profile_link: {type : 'text', label: 'profile_link'},
+    flag: {type : 'text', label: 'flag'},
     create_dt: { type: 'text', label: 'Created Time' },
     edit_dt: { type: 'text', label: 'Edit Time' },
   } as any;
@@ -19,20 +23,24 @@ export default function ArtistInput({ArtistId} : any) {
     initialValues: Object.keys(fieldsConfig).reduce((acc: any, field) => {
       acc[field] = ''; // Initialize all fields with empty strings
       return acc;
-    }, {} as ArtistRow),
-    onSubmit: async (values : ArtistRowInsert) => {
-      const artist: ArtistRowInsert = {
+    }, {} as ChannelRow),
+    onSubmit: async (values : ChannelRowInsert) => {
+      const channel: ChannelRowInsert = {
         id: values.id,
         name:values.name,
+        join_date: values.join_date,
+        email : values.email,
+        profile_link: values.profile_link,
+        flag :values.flag,
         edit_dt: new Date().toISOString(),
       };
 
-      if (ArtistId) {
-        await updateArtist(artist); // 수정 시 updateArtist 호출
+      if (ChannelId) {
+        await updateChannel(channel); // 수정 시 updateChannel 호출
         alert('수정되었습니다.');
       } else {
-        artist.create_dt = new Date().toISOString()
-        await createArtist(artist); // 새 곡 추가
+        channel.created_dt = new Date().toISOString()
+        await createChannel(channel); // 새 곡 추가
         alert('입력되었습니다.');
       }
     },
@@ -40,13 +48,13 @@ export default function ArtistInput({ArtistId} : any) {
 
   // 곡 정보 불러오기
   useEffect(() => {
-    const fetchArtist = async () => {
-      if (ArtistId) {
+    const fetchChannel = async () => {
+      if (ChannelId) {
         try {
-          const ArtistData = await getArtist(ArtistId); // ArtistId에 해당하는 곡 정보 불러오기
-          setValues(ArtistData); // form values에 곡 정보 설정
+          const ChannelData = await getChannel(ChannelId); // ChannelId에 해당하는 곡 정보 불러오기
+          setValues(ChannelData); // form values에 곡 정보 설정
         } catch (error) {
-          console.error('Error fetching Artist:', error);
+          console.error('Error fetching Channel:', error);
         } finally {
           setLoading(false);
         }
@@ -55,15 +63,19 @@ export default function ArtistInput({ArtistId} : any) {
         setValues({
           id: '',
           name: '',
-          create_dt: '',
+          join_date: '',
+          email: '',
+          profile_link: '',
+          flag :'',
+          created_dt: '',
           edit_dt: '',
         });
         setLoading(false);
       }
     };
 
-    fetchArtist();
-  }, [ArtistId, setValues]);
+    fetchChannel();
+  }, [ChannelId, setValues]);
 
   if (loading) return <div>Loading...</div>;
 
@@ -77,13 +89,13 @@ export default function ArtistInput({ArtistId} : any) {
               <Input
                 type={fieldsConfig[fieldName].type}
                 name={fieldName}
-                value={values[fieldName as keyof ArtistRow]}
+                value={values[fieldName as keyof ChannelRow]}
                 onChange={handleChange}
-                className={`w-full ${errors[fieldName as keyof ArtistRow] && 'errorInput'}`} />
+                className={`w-full ${errors[fieldName as keyof ChannelRow] && 'errorInput'}`} />
             </label>
-            {errors[fieldName as keyof ArtistRow] && (
+            {errors[fieldName as keyof ChannelRow] && (
               <span className="text-red-500 text-sm">
-                {errors[fieldName as keyof ArtistRow]}
+                {errors[fieldName as keyof ChannelRow]}
               </span>
             )}
           </div>
@@ -92,7 +104,7 @@ export default function ArtistInput({ArtistId} : any) {
           className="h-[50px] w-[120px] bg-gray-800 text-white rounded-3xl"
           type="submit"
           disabled={submitting} >
-          {ArtistId ? '수정' : '추가'}
+          {ChannelId ? '수정' : '추가'}
         </Button>
       </form>
     </div>

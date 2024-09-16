@@ -13,4 +13,4 @@ https://startunes.vercel.app/
 
 ## MEMO
 아이콘 : https://react-icons.github.io/react-icons/
-
+supabase 테이블 업데이트 : npm run generate-types

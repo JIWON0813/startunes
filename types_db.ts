@@ -30,6 +30,39 @@ export type Database = {
         }
         Relationships: []
       }
+      channel: {
+        Row: {
+          created_dt: string
+          edit_dt: string | null
+          email: string | null
+          flag: string | null
+          id: string
+          join_date: string | null
+          name: string | null
+          profile_link: string | null
+        }
+        Insert: {
+          created_dt?: string
+          edit_dt?: string | null
+          email?: string | null
+          flag?: string | null
+          id: string
+          join_date?: string | null
+          name?: string | null
+          profile_link?: string | null
+        }
+        Update: {
+          created_dt?: string
+          edit_dt?: string | null
+          email?: string | null
+          flag?: string | null
+          id: string
+          join_date?: string | null
+          name?: string | null
+          profile_link?: string | null
+        }
+        Relationships: []
+      }
       song: {
         Row: {
           artist: string | null
