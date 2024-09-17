@@ -16,7 +16,7 @@ export async function getVideos({
 }){
    const supabase = await createServerSupabaseClient()
 
-   const {data , error} = await supabase.from('video').select('*').like('id', `%${searchInput}%`).order('create_dt', {ascending : false})
+   const {data , error} = await supabase.from('video').select('*').like('id', `%${searchInput}%`).order('created_dt', {ascending : false})
 
   if(error){
     handleError(error)

@@ -16,7 +16,7 @@ export async function getArtists({
 }){
    const supabase = await createServerSupabaseClient()
 
-   const {data , error} = await supabase.from('artist').select('*').like('name', `%${searchInput}%`).order('create_dt', {ascending : false})
+   const {data , error} = await supabase.from('artist').select('*').like('name', `%${searchInput}%`).order('created_dt', {ascending : false})
 
   if(error){
     handleError(error)
