@@ -1,6 +1,7 @@
 'use server'
 
 import axios from 'axios';
+import cheerio from 'cheerio';
 
 export async function getTest() {
   const url = 'https://www.youtube.com/watch?v=u8wu6fDGK44';
@@ -9,9 +10,13 @@ export async function getTest() {
     // HTML 가져오기
     const response = await axios.get(url);
     const html = response.data
-    console.log(html)
+
+    const $ = cheerio.load(html);
+    const link = $('link[rel="preload"][as="image"]').attr('href');
+    console.log(link)
     // DOM 파싱
-    return html
+    
+    return link
     //썸네일
     // <link as="image" rel="preload" href="https://i.ytimg.com/vi/cJlypCqudBA/hqdefault.jpg" fetchpriority="high">
 

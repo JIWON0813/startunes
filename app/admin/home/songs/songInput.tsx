@@ -95,6 +95,7 @@ export default function SongInput({songId} : any) {
                 value={values[fieldName as keyof SongRow]}
                 onChange={handleChange}
                 className={`w-full ${errors[fieldName as keyof SongRow] && 'errorInput'}`}
+                readOnly={fieldName === 'song_id' && songId ? true : false}
               />
             </label>
             {errors[fieldName as keyof SongRow] && (

@@ -94,7 +94,10 @@ export default function ChannelInput({ChannelId} : any) {
                 name={fieldName}
                 value={values[fieldName as keyof ChannelRow]}
                 onChange={handleChange}
-                className={`w-full ${errors[fieldName as keyof ChannelRow] && 'errorInput'}`} />
+                className={`w-full ${errors[fieldName as keyof ChannelRow] && 'errorInput'}`} 
+                readOnly={fieldName === 'id' && ChannelId ? true : false}
+                />
+                
             </label>
             {errors[fieldName as keyof ChannelRow] && (
               <span className="text-red-500 text-sm">

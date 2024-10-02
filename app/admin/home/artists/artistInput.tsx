@@ -88,7 +88,10 @@ export default function ArtistInput({ArtistId} : any) {
                 name={fieldName}
                 value={values[fieldName as keyof ArtistRow]}
                 onChange={handleChange}
-                className={`w-full ${errors[fieldName as keyof ArtistRow] && 'errorInput'}`} />
+                className={`w-full ${errors[fieldName as keyof ArtistRow] && 'errorInput'}`} 
+                readOnly={fieldName === 'id' && ArtistId ? true : false}
+                />
+                
             </label>
             {errors[fieldName as keyof ArtistRow] && (
               <span className="text-red-500 text-sm">

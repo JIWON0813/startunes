@@ -1,8 +1,6 @@
 "use client"; // this is a client component 👈🏽
 
 import { useState } from 'react';
-import classes from "./Home.module.css";
-import Header from './components/Header';
 
 
 export default function MainList() {
@@ -24,26 +22,23 @@ export default function MainList() {
 
   return (
     <div className='h-screen w-full flex-col pl-20 pr-40'>
- 
+      <div className={`text-white`}>ssibal</div>
       <div className="pt-20"></div>
 
       <div className="flex items-center">
         <svg className="h-full w-[3%] text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
         </svg>
-        <span className="text-white font-tektur text-[50px]">StarTunes</span>
+        <span className="text-white text-[50px]">StarTunes</span>
       </div>
       <div className="pt-10"></div>
 
       <div className="h-[70%] w-full rounded-[50px] p-11 flex flex-col">
-        <div className='text-[30px]'>
-          Home
-        </div>
 
         <div className='flex-grow w-full pt-5 overflow-hidden'>
-          <div className='flex flex-row h-full overflow-x-auto justify-between'>
+          <div className='flex h-full overflow-x-auto'>
             {videos.map((videoId, index) => (
-              <div key={index} className='w-[30%] h-[90%] flex-shrink-0'>
+              <div key={index} className='w-[33%] h-[100%] '>
                 <div className='relative w-full h-full'>
                   <iframe 
                     src={`https://www.youtube.com/embed/${videoId}`} 

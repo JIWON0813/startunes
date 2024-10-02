@@ -99,6 +99,7 @@ export default function VideoInput({videoId} : any) {
                 value={values[fieldName as keyof VideoRow]}
                 onChange={handleChange}
                 className={`w-full ${errors[fieldName as keyof VideoRow] && 'errorInput'}`}
+                readOnly={fieldName === 'id' && videoId ? true : false}
               />
             </label>
             {errors[fieldName as keyof VideoRow] && (

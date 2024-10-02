@@ -7,21 +7,34 @@ import { getTest } from './api/test';
 
 // 'https://www.youtube.com/watch?v=u8wu6fDGK44'
 export default function Test() {
-  const fetchData = async () => {
-    const html = await getTest();
+  const [imageUrl, setImageUrl] = useState('');
 
-    console.log(html)
-  };
+  useEffect(() => {
+    const fetchChannel = async () => {
+      const link = await getTest();
+      setImageUrl(link!)
+      console.log(link)
+    };
 
-  fetchData();
+    fetchChannel();
+  }, [imageUrl, setImageUrl]);
+
+  if(imageUrl == ''){
+        return(
+          <div>
+          TEST
+        </div>
+        )
+  }
 
   return (
     <div>
       <div>
         TEST
       </div>
+      
       <Image
-        src="https://i.ytimg.com/vi/u8wu6fDGK44/maxresdefault.jpg"
+        src={imageUrl}
         alt="YouTube Thumbnail"
         width={480} // 원하는 너비
         height={360} // 원하는 높이
