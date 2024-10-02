@@ -1,15 +1,29 @@
 'use server'
 
 import axios from 'axios';
-import cheerio from 'cheerio';
 
 export async function getTest() {
   const url = 'https://www.youtube.com/watch?v=u8wu6fDGK44';
 
   try {
     // HTML 가져오기
-    const response = await axios.get(url);
-    const html = response.data
+    let html
+    await axios.get(url,  {
+      timeout: 60000,
+      decompress: true,
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+      headers: {
+        'User-Agent': 'Mozilla/5.0',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Connection': 'keep-alive'
+      }
+    }).then((res) =>{
+      html = res.data;
+    });
+    
+    const cheerio = require('cheerio');
 
     const $ = cheerio.load(html);
     const link = $('link[rel="preload"][as="image"]').attr('href');
@@ -27,6 +41,7 @@ export async function getTest() {
     // <a class="yt-simple-endpoint style-scope yt-formatted-string" spellcheck="false" href="/@jinyongjin_official">진용진</a>
 
   } catch (error : any) {
+    console.log(error.message)
     // res.status(500).json({ message: 'Error fetching image', error: error.message });
   }
 }
