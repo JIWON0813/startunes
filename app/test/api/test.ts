@@ -1,34 +1,31 @@
 'use server'
 
-import axios from 'axios';
-
 export async function getTest() {
   const url = 'https://www.youtube.com/watch?v=u8wu6fDGK44';
 
+  const axios = require('axios');
+
   try {
-    // HTML 가져오기
+    // // HTML 가져오기
     let html
-    await axios.get(url,  {
-      timeout: 60000,
-      decompress: true,
-      maxContentLength: Infinity,
-      maxBodyLength: Infinity,
-      headers: {
-        'User-Agent': 'Mozilla/5.0',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Connection': 'keep-alive'
-      }
-    }).then((res) =>{
+    await axios.get(url).then((res : any) =>{
       html = res.data;
     });
     
     const cheerio = require('cheerio');
 
     const $ = cheerio.load(html);
-    const link = $('link[rel="preload"][as="image"]').attr('href');
-    console.log(link)
+    // const link = $('link[rel="preload"][as="image"]').attr('href');
+    // console.log(link)
     // DOM 파싱
+
+    //$('meta[name="title"]').attr('content') 제목
+    const asd = $('link[rel="preload"][as="image"]').attr('href');
+    console.log(asd)
+    const videoId = url.split('v=')[1];
+    
+    // 2. 썸네일 URL 생성
+    const link = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
     
     return link
     //썸네일
