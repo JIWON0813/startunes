@@ -22,7 +22,6 @@ export default function MainList() {
 
   return (
     <div className='h-screen w-full flex-col pl-20 pr-40'>
-      <div className={`text-white`}>ssibal</div>
       <div className="pt-20"></div>
 
       <div className="flex items-center">

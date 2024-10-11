@@ -2,12 +2,6 @@
 
 import './globals.css';
 import Image from 'next/image'
-import { Tektur} from 'next/font/google'
-
-export const te = Tektur({
-  subsets: ['latin'],
-  variable: '--font-tektur'
-})
 
 export default function RootLayout({
   children,

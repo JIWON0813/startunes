@@ -1,14 +1,3 @@
-Need to install the following packages:
-supabase@1.204.3
-Ok to proceed? (y) 
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
-
 export type Database = {
   public: {
     Tables: {
@@ -37,7 +26,7 @@ export type Database = {
           edit_dt?: string | null
           eng_name?: string | null
           flag?: string | null
-          id?: string
+          id: string
           name?: string
         }
         Relationships: []
@@ -69,7 +58,7 @@ export type Database = {
           edit_dt?: string | null
           email?: string | null
           flag?: string | null
-          id?: string
+          id: string
           join_date?: string | null
           name?: string | null
         }
@@ -124,7 +113,7 @@ export type Database = {
           language?: string | null
           lyrics_all?: string | null
           lyrics_part?: string | null
-          song_id?: string
+          song_id: string
           title?: string | null
         }
         Relationships: []
