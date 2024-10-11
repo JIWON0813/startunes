@@ -1,3 +1,6 @@
+Need to install the following packages:
+supabase@1.204.3
+Ok to proceed? (y) 
 export type Json =
   | string
   | number
@@ -34,7 +37,7 @@ export type Database = {
           edit_dt?: string | null
           eng_name?: string | null
           flag?: string | null
-          id: string
+          id?: string
           name?: string
         }
         Relationships: []
@@ -49,7 +52,6 @@ export type Database = {
           id: string
           join_date: string | null
           name: string | null
-          profile_link: string | null
         }
         Insert: {
           created_dt?: string
@@ -60,7 +62,6 @@ export type Database = {
           id: string
           join_date?: string | null
           name?: string | null
-          profile_link?: string | null
         }
         Update: {
           created_dt?: string
@@ -68,10 +69,27 @@ export type Database = {
           edit_dt?: string | null
           email?: string | null
           flag?: string | null
-          id: string
+          id?: string
           join_date?: string | null
           name?: string | null
-          profile_link?: string | null
+        }
+        Relationships: []
+      }
+      profile_link: {
+        Row: {
+          artist_id: string | null
+          link: string
+          name: string
+        }
+        Insert: {
+          artist_id?: string | null
+          link: string
+          name: string
+        }
+        Update: {
+          artist_id?: string | null
+          link?: string
+          name: string
         }
         Relationships: []
       }
@@ -106,47 +124,47 @@ export type Database = {
           language?: string | null
           lyrics_all?: string | null
           lyrics_part?: string | null
-          song_id: string
+          song_id?: string
           title?: string | null
         }
         Relationships: []
       }
       video: {
         Row: {
+          artist: string
           channel: string | null
-          cover_artist: string | null
           created_dt: string
           description: string | null
           edit_dt: string | null
           flag: string | null
-          id: string
+          link: string
           original_artist_id: string | null
           song_id: string | null
-          song_title: string | null
+          title: string
         }
         Insert: {
+          artist: string
           channel?: string | null
-          cover_artist?: string | null
           created_dt?: string
           description?: string | null
           edit_dt?: string | null
           flag?: string | null
-          id: string
+          link: string
           original_artist_id?: string | null
           song_id?: string | null
-          song_title?: string | null
+          title: string
         }
         Update: {
+          artist?: string
           channel?: string | null
-          cover_artist?: string | null
           created_dt?: string
           description?: string | null
           edit_dt?: string | null
           flag?: string | null
-          id: string
+          link: string
           original_artist_id?: string | null
           song_id?: string | null
-          song_title?: string | null
+          title?: string
         }
         Relationships: []
       }

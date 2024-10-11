@@ -16,7 +16,7 @@ export async function getVideos({
 }){
    const supabase = await createServerSupabaseClient()
 
-   const {data , error} = await supabase.from('video').select('*').like('id', `%${searchInput}%`).order('created_dt', {ascending : false})
+   const {data , error} = await supabase.from('video').select('*').like('artist', `%${searchInput}%`).order('created_dt', {ascending : false})
 
   if(error){
     handleError(error)
@@ -28,7 +28,7 @@ export async function getVideos({
 export async function getVideo(id : string){
   const supabase = await createServerSupabaseClient()
 
-  const {data , error} = await supabase.from('video').select('*').eq('id', id)
+  const {data , error} = await supabase.from('video').select('*').eq('link', id)
 
  if(error){
    handleError(error)
@@ -63,7 +63,7 @@ export async function updateVideo(video:VideoRowUpdate) {
   const {data, error} = await supabase.from('video').update({
     ...video,
     edit_time : new Date().toISOString()
-  }).eq('id', video.id)
+  }).eq('link', video.link)
 
   if(error){
     handleError(error)
@@ -75,7 +75,7 @@ export async function updateVideo(video:VideoRowUpdate) {
 export async function deleteVideo(id : string) {
   const supabase = await createServerSupabaseClient()
 
-  const {data, error} = await supabase.from('video').delete().match({ id : id})
+  const {data, error} = await supabase.from('video').delete().match({ link : id})
 
   if(error){
     handleError(error)

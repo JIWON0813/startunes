@@ -10,7 +10,7 @@ export default function VideoInput({videoId} : any) {
   const [loading, setLoading] = useState(true); // 곡 정보 로딩 상태
 
   const fieldsConfig = {
-    id: { type: 'text', label: 'Video ID' },
+    link: { type: 'text', label: 'link' },
     cover_artist: { type: 'text', label: 'cover_artist' },
     original_artist_id: { type: 'text', label: 'original_artist_id' },
     song_id: { type: 'text', label: 'Song_id' },
@@ -29,13 +29,13 @@ export default function VideoInput({videoId} : any) {
     }, {} as VideoRow),
     onSubmit: async (values : VideoRowInsert) => {
       const video: VideoRowInsert = {
-        id: values.id,
+        link:values.link,
         song_id: values.song_id,
-        cover_artist: values.cover_artist,
+        artist: values.artist,
         original_artist_id: values.original_artist_id,
-        song_title:values.song_title,
+        title:values.title,
         channel:values.channel,
-        description:values.description,
+        description:values.description,      
         flag:values.flag,
         edit_dt: new Date().toISOString(),
       };
@@ -66,13 +66,13 @@ export default function VideoInput({videoId} : any) {
       }
       else{
         setValues({
-          id: '',
+          link:'',
           song_id: '',
-          song_title:'',
+          title:'',
           channel:'',
           description:'',
           flag:'',
-          cover_artist: '',
+          artist: '',
           original_artist_id: '',
           created_dt: '',
           edit_dt: '',

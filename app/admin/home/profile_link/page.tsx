@@ -8,12 +8,12 @@ import {
   type MRT_ColumnDef,
 } from 'material-react-table';
 import { createBrowserSupabaseClient } from '@/app/utils/supabase/client';
-import { deleteVideo, getVideos, VideoRow } from './api/video';
+import { deleteProfileLink, getProfileLinks, ProfileLinkRow } from './api/profile_link';
 import { useRouter } from 'next/navigation';
-import VideoInput from './videoInput';
+import ProfileLinkInput from './profileLinkInput';
 
-export default function VideosPage() {    
-  const [data, setData] = useState<VideoRow[]>([]); 
+export default function ProfileLinkPage() {    
+  const [data, setData] = useState<ProfileLinkRow[]>([]); 
   const router = useRouter();
 
   useEffect(() => {
@@ -28,21 +28,21 @@ export default function VideosPage() {
     checkSession();
 
     const fetchData = async () => {
-      const songsData = await getVideos({}); 
+      const songsData = await getProfileLinks({}); 
       setData(songsData ?? []); 
     };
     fetchData();
   }, []);
 
-  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null); // 선택된 곡 ID
+  const [selectedProfileLinkId, setSelectedProfileLinkId] = useState<string | null>(null); // 선택된 곡 ID
 
   // 삭제 버튼 클릭 시 confirm을 사용해 삭제 여부 확인
-  const handleDelete = async (link: string) => {
+  const handleDelete = async (nameId: string) => {
     const isConfirmed = confirm('삭제하시겠습니까?'); // 확인/취소 팝업
     if (isConfirmed) {
       try {
-        await deleteVideo(link); // deleteVideo 호출
-        setData((prevData) => prevData.filter((video) => video.link !== link)); // 삭제된 곡 제거
+        await deleteProfileLink(nameId); // deleteProfileLink 호출
+        setData((prevData) => prevData.filter((song) => song.name !== nameId)); // 삭제된 곡 제거
       } catch (error) {
         console.error('Error deleting song:', error);
       }
@@ -51,57 +51,21 @@ export default function VideosPage() {
 
 
   //should be memoized or stable
-  const columns = useMemo<MRT_ColumnDef<VideoRow>[]>(
+  const columns = useMemo<MRT_ColumnDef<ProfileLinkRow>[]>(
     () => [
-      {
-        accessorKey: 'link', 
-        header: 'link',
-        size: 150,
-    },
         {
-            accessorKey: 'artist', 
-            header: 'Artist',
+            accessorKey: 'name',
+            header: 'name',
+            size: 100,
+        },
+        {
+            accessorKey: 'link', 
+            header: 'link',
             size: 150,
         },
           {
-            accessorKey: 'original_artist_id',
-            header: 'Original Artist ID',
-            size: 150,
-          },
-        {
-            accessorKey: 'song_id',
-            header: 'song_id',
-            size: 150,
-        },
-        {
-          accessorKey: 'title', 
-          header: 'title',
-          size: 150,
-      },
-
-      {
-        accessorKey: 'channel', 
-        header: 'channel',
-        size: 150,
-    },
-    {
-      accessorKey: 'description', 
-      header: 'description',
-      size: 150,
-  },
-  {
-    accessorKey: 'flag', 
-    header: 'flag',
-    size: 150,
-},
-        {
-            accessorKey: 'create_dt',
-            header: 'Creation Date',
-            size: 150,
-          },
-          {
-            accessorKey: 'edit_dt',
-            header: 'Edit Date',
+            accessorKey: 'rtist_id',
+            header: 'Artist ID',
             size: 150,
           },
       {
@@ -110,7 +74,7 @@ export default function VideosPage() {
         size: 100,
         Cell: ({ row }) => (
           <div>
-          <Button className='h-10 w-20 bg-gray-800 text-white rounded-3xl' onClick={() => handleEdit(row.original.link)} >
+          <Button className='h-10 w-20 bg-gray-800 text-white rounded-3xl' onClick={() => handleEdit(row.original.name)} >
             수정
           </Button>
           </div>
@@ -123,7 +87,7 @@ export default function VideosPage() {
         size: 100,
         Cell: ({ row }) => (
           <div>
-          <Button className='h-10 w-20 bg-red-600 text-white rounded-3xl' onClick={() => handleDelete(row.original.link)}>
+          <Button className='h-10 w-20 bg-red-600 text-white rounded-3xl' onClick={() => handleDelete(row.original.name)}>
             삭제
           </Button>
           </div>
@@ -145,11 +109,11 @@ export default function VideosPage() {
   const [open, setOpen] = useState(false); // 팝업 열림 상태
   const handleOpen = () => setOpen(!open); // 팝업 열기/닫기 토글
   const handleAddNew = () => {
-    setSelectedVideoId(null); // Reset songId to trigger form reset
+    setSelectedProfileLinkId(null); // Reset nameId to trigger form reset
     setOpen(true);
   };
-  const handleEdit = (link: string) => {
-    setSelectedVideoId(link); // 선택된 곡 ID 설정
+  const handleEdit = (id: string) => {
+    setSelectedProfileLinkId(id); // 선택된 곡 ID 설정
     setOpen(true); // 모달 열기
   };
   return(
@@ -165,7 +129,7 @@ export default function VideosPage() {
         <Dialog open={open} handler={handleOpen}>
           <DialogHeader>영상</DialogHeader>
           <DialogBody divider>
-          <VideoInput videoId={selectedVideoId} /> 
+          <ProfileLinkInput videoId={selectedProfileLinkId} /> 
         </DialogBody>
           <DialogFooter>
             <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
