@@ -6,7 +6,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='h-full w-full flex-col pl-20 pr-40'>
+    <div className='h-full w-full flex-col'>
       <div className="pt-10"></div>
 
       <div className="flex items-center">

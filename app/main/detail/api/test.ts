@@ -4,10 +4,10 @@ const cheerio = require('cheerio')
 const axios = require('axios')
 
 export async function getTest(url : string) {
-  url = 'https://www.youtube.com/watch?v=Y2E71oe0aSM';
+  // url = 'https://www.youtube.com/watch?v=Y2E71oe0aSM';
 
   try {
-    const videoId = url.split('v=')[1];
+    const videoId = url; //.split('v=')[1]
     
 
     // 2. 썸네일 URL 생성
@@ -23,7 +23,10 @@ export async function getTest(url : string) {
 
     console.log('Profile Image URL:', profileImageUrl);
 
-    return link
+    return {
+      link : link,
+      profile : profileImageUrl
+    }
 
   } catch (error : any) {
     console.log(error.message)

@@ -6,20 +6,20 @@ import Image from 'next/image';
 import { getTest } from './api/test';
 
 // 'https://www.youtube.com/watch?v=u8wu6fDGK44'
-export default function Test() {
-  const [imageUrl, setImageUrl] = useState('');
+export default function Detail(param: { id: string }) {
+  const [imageUrl, setImageUrl] = useState({link : '', profile : ''});
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const link = await getTest('');
-      setImageUrl(link!)
-      console.log(link)
+      const data = await getTest(param.id);
+      setImageUrl(data!)
+      console.log(data?.link)
     };
 
     fetchChannel();
   }, [imageUrl, setImageUrl]);
 
-  if(imageUrl == ''){
+  if(imageUrl.link == ''){
         return(
           <div>
           TEST
@@ -28,11 +28,11 @@ export default function Test() {
   }
 
   return (
-<div className="relative w-full h-[650px] mx-auto">
+<div className="relative w-full h-[500px] mx-auto">
       {/* 이미지 컨테이너 */}
       <div 
-        className="absolute inset-0 bg-cover bg-center object-cover"
-        style={{ backgroundImage: `url(${imageUrl})` }} // 이미지 경로
+        className="w-full h-full absolute inset-0 bg-cover bg-center object-cover"
+        style={{ backgroundImage: `url(${imageUrl!.link})` }} // 이미지 경로
       >
       </div>
 
@@ -50,11 +50,8 @@ export default function Test() {
           <button className="px-4 py-2 bg-gray-600 text-white rounded-md">Copy URL</button>
         </div>
       </div>
-      <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded-md">
-        2:56
-      </div>
-      <div className="absolute top-3 right-3 w-12 h-12 bg-cover rounded-lg"
-        style={{ backgroundImage: "url('/plus-icon.jpg')" }} // 오른쪽 상단 아이콘 이미지
+      <div className="absolute top-[50px] right-[50px] w-[170px] h-[170px] bg-cover rounded-lg"
+        style={{ backgroundImage: `url(${imageUrl!.profile})` }} // 오른쪽 상단 아이콘 이미지
       ></div>
     </div>
   );
