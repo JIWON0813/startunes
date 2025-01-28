@@ -63,7 +63,7 @@ export async function updateVideo(video:VideoRowUpdate) {
   const {data, error} = await supabase.from('video').update({
     ...video,
     edit_time : new Date().toISOString()
-  }).eq('link', video.link)
+  }).eq('link', video.link!)
 
   if(error){
     handleError(error)

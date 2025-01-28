@@ -63,7 +63,7 @@ export async function updateArtist(artist:ArtistRowUpdate) {
   const {data, error} = await supabase.from('artist').update({
     ...artist,
     edit_dt : new Date().toISOString()
-  }).eq('id', artist.id)
+  }).eq('id', artist.id!)
 
   if(error){
     handleError(error)

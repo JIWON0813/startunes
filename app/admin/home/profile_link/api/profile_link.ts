@@ -63,7 +63,7 @@ export async function updateProfileLink(profile_link:ProfileLinkRowUpdate) {
   const {data, error} = await supabase.from('profile_link').update({
     ...profile_link,
     edit_time : new Date().toISOString()
-  }).eq('name', profile_link.name)
+  }).eq('name', profile_link.name!)
 
   if(error){
     handleError(error)

@@ -63,7 +63,7 @@ export async function updateChannel(channel:ChannelRowUpdate) {
   const {data, error} = await supabase.from('channel').update({
     ...channel,
     edit_dt : new Date().toISOString()
-  }).eq('id', channel.id)
+  }).eq('id', channel.id!)
 
   if(error){
     handleError(error)

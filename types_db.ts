@@ -1,3 +1,11 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
 export type Database = {
   public: {
     Tables: {
@@ -26,7 +34,7 @@ export type Database = {
           edit_dt?: string | null
           eng_name?: string | null
           flag?: string | null
-          id: string
+          id?: string
           name?: string
         }
         Relationships: []
@@ -58,7 +66,7 @@ export type Database = {
           edit_dt?: string | null
           email?: string | null
           flag?: string | null
-          id: string
+          id?: string
           join_date?: string | null
           name?: string | null
         }
@@ -78,13 +86,14 @@ export type Database = {
         Update: {
           artist_id?: string | null
           link?: string
-          name: string
+          name?: string
         }
         Relationships: []
       }
       song: {
         Row: {
           artist: string | null
+          channel_id: string | null
           created_time: string
           description: string | null
           edit_time: string | null
@@ -96,6 +105,7 @@ export type Database = {
         }
         Insert: {
           artist?: string | null
+          channel_id?: string | null
           created_time?: string
           description?: string | null
           edit_time?: string | null
@@ -107,13 +117,14 @@ export type Database = {
         }
         Update: {
           artist?: string | null
+          channel_id?: string | null
           created_time?: string
           description?: string | null
           edit_time?: string | null
           language?: string | null
           lyrics_all?: string | null
           lyrics_part?: string | null
-          song_id: string
+          song_id?: string
           title?: string | null
         }
         Relationships: []
@@ -150,7 +161,7 @@ export type Database = {
           description?: string | null
           edit_dt?: string | null
           flag?: string | null
-          link: string
+          link?: string
           original_artist_id?: string | null
           song_id?: string | null
           title?: string
@@ -253,4 +264,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never

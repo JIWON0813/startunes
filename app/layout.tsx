@@ -10,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`font-tektur`}>
-      <body className="relative h-screen w-screen">
+      <body className="relative h-full w-full">
         <div className="absolute inset-0 z-0">
           <Image
             src="/image/background.png"  // public 폴더 안에 image/background.png 파일이 있어야 함

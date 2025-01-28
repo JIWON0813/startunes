@@ -24,5 +24,11 @@
           "action": "debugWithChrome"
         }
       }
-    ]
-  }
+    ],
+    "compounds": [
+    {
+      "name": "Run Full Stack",   // Compound name
+      "configurations": ["Next.js: debug full stack"] // Full stack 구성 실행
+    }
+  ]
+}
