@@ -29,6 +29,6 @@ export async function getInfoFromUrl(url : string, artist_id : string) {
     }
 
   } catch (error : any) {
-    console.log(error.message)
+    console.log('error' + error.message)
   }
 }

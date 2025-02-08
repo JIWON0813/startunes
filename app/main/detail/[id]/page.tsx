@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getInfoFromUrl } from './api/test';
-import * as query from './api/query'
+import { getInfoFromUrl } from '../api/test';
+import * as query from '../api/query'
 import { useSearchParams } from 'next/navigation';
-import { SongRow } from './api/query';
+import { SongRow } from '../api/query';
 import { useRouter } from 'next/navigation';
 
-export default function Detail() {
+export default function Detail({params} : any) {
   const router = useRouter();
 
   // 랜덤 색상 생성 함수
@@ -27,19 +27,20 @@ export default function Detail() {
   const [song, setSong] = useState({} as SongRow);
   const [songs, setSongs] = useState([] as SongRow[]);
 
-  const params = useSearchParams();
-
   useEffect(() => {
     const fetchChannel = async () => {
-      const id = params.get('id')!;
-      const data = await getInfoFromUrl(id, ''); // 데이터 가져오기
-      setSong(await query.getSong(id));
+      if(imageUrl.link !== '') return;
+      
+      const song_id = params.id as string ?? '';
+      const data = await getInfoFromUrl(song_id, ''); // 데이터 가져오기
+      
+      setSong(await query.getSong(song_id));
       setImageUrl(data!); // 이미지와 videoId를 state에 저장
-      setVideoId(id); // videoId 저장
+      setVideoId(song_id); // videoId 저장
     };
 
     fetchChannel();
-  }, [params]);
+  });
 
   if (imageUrl.link === '') {
     return <div>Loading...</div>;
@@ -68,7 +69,7 @@ export default function Detail() {
   };
 
   const handleButtonClick = (artistId : string) => {
-    router.push(`/main/artist?id=${artistId}`);
+    router.push(`/main/artist/${artistId}`);
   };
 
   return (
@@ -108,7 +109,8 @@ export default function Detail() {
           </div>
         </div>
         <button
-          onClick={() => handleButtonClick(song.artist!)}
+          // onClick={() => handleButtonClick(song.channel_id!)}
+          onClick={() => handleButtonClick('1')}
           className="absolute top-[50px] right-[50px] w-[170px] h-[170px] bg-cover rounded-lg"
           style={{
             backgroundImage: `url(${imageUrl.profile})`,
@@ -168,10 +170,3 @@ export default function Detail() {
     </div>
   );
 }
-
-
-{/* <h1 className="text-4xl font-bold">{song.title}</h1>
-          <h2 className="text-lg mt-2">{song.artist}</h2>
-          <div className="bg-yellow-400 p-4 mt-4 text-sm italic">
-            {song.lyrics_part}
-          </div> */}

@@ -30,7 +30,7 @@ export default function MainList() {
   }, []);
 
   const handleClick = (videoId: string) => {
-    router.push(`/main/detail?id=${videoId}`);
+    router.push(`/main/detail/${videoId}`);
   };
 
   const [videos, setVideos] = useState(videoUrlLists.map(list => list[0]));
