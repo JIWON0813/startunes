@@ -48,9 +48,8 @@ export default function SignInPage({setLogin} : any) {
             signInMutation.mutate();
           } }
           loading={signInMutation.isPending}
-          disabled={signInMutation.isPending}
           color="light-blue"
-          className="w-full text-md py-1 bg-black" >
+          className="w-full text-md py-1 bg-black z-0" >
             로그인
           </Button>
         </div>

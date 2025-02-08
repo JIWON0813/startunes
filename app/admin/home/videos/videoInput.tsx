@@ -14,7 +14,7 @@ export default function VideoInput({videoId} : any) {
     cover_artist: { type: 'text', label: 'cover_artist' },
     original_artist_id: { type: 'text', label: 'original_artist_id' },
     song_id: { type: 'text', label: 'Song_id' },
-    song_title: { type: 'text', label: 'song_title' },
+    title: { type: 'text', label: 'title' },
     channel: { type: 'text', label: 'channel' },
     description: { type: 'text', label: 'description' },
     flag: { type: 'text', label: 'flag' },
@@ -31,7 +31,7 @@ export default function VideoInput({videoId} : any) {
       const video: VideoRowInsert = {
         link:values.link,
         song_id: values.song_id,
-        artist: values.artist,
+        cover_artist: values.cover_artist,
         original_artist_id: values.original_artist_id,
         title:values.title,
         channel:values.channel,
@@ -66,17 +66,8 @@ export default function VideoInput({videoId} : any) {
       }
       else{
         setValues({
-          link:'',
-          song_id: '',
-          title:'',
-          channel:'',
-          description:'',
-          flag:'',
-          artist: '',
-          original_artist_id: '',
-          created_dt: '',
-          edit_dt: '',
-        });
+         
+        } as VideoRow);
         setLoading(false);
       }
     };

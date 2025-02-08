@@ -5,7 +5,7 @@ import { getInfoFromUrl } from './api/test';
 import * as query from './api/query'
 import { useSearchParams } from 'next/navigation';
 import { SongRow } from './api/query';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function Detail() {
   const router = useRouter();
@@ -84,10 +84,10 @@ export default function Detail() {
 
         {/* 텍스트와 프로필 이미지 */}
         <div className="absolute top-5 left-5 text-black">
-          <h1 className="text-4xl font-bold">{song.title}</h1>
-          <h2 className="text-lg mt-2">{song.artist}</h2>
+          <h1 className="text-4xl font-bold">title</h1>
+          <h2 className="text-lg mt-2">artist</h2>
           <div className="bg-yellow-400 p-4 mt-4 text-sm italic">
-            {song.lyrics_part}
+            lyrics_part
           </div>
           <div className="flex space-x-4 mt-6">
             {/* Play Now 버튼 */}
@@ -168,3 +168,10 @@ export default function Detail() {
     </div>
   );
 }
+
+
+{/* <h1 className="text-4xl font-bold">{song.title}</h1>
+          <h2 className="text-lg mt-2">{song.artist}</h2>
+          <div className="bg-yellow-400 p-4 mt-4 text-sm italic">
+            {song.lyrics_part}
+          </div> */}

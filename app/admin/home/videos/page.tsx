@@ -59,8 +59,8 @@ export default function VideosPage() {
         size: 150,
     },
         {
-            accessorKey: 'artist', 
-            header: 'Artist',
+            accessorKey: 'cover_artist', 
+            header: 'Cover_Artist',
             size: 150,
         },
           {

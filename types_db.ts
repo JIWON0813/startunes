@@ -131,8 +131,8 @@ export type Database = {
       }
       video: {
         Row: {
-          artist: string
           channel: string | null
+          cover_artist: string
           created_dt: string
           description: string | null
           edit_dt: string | null
@@ -143,8 +143,8 @@ export type Database = {
           title: string
         }
         Insert: {
-          artist: string
           channel?: string | null
+          cover_artist: string
           created_dt?: string
           description?: string | null
           edit_dt?: string | null
@@ -155,8 +155,8 @@ export type Database = {
           title: string
         }
         Update: {
-          artist?: string
           channel?: string | null
+          cover_artist?: string
           created_dt?: string
           description?: string | null
           edit_dt?: string | null
